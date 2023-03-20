@@ -1,4 +1,4 @@
-# A1-Restaurant List
+# A1｜Restaurant List
 
 ## 介紹
 
