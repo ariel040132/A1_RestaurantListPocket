@@ -1,8 +1,7 @@
-README.md
-# A1-Restaurant List
-1.環境建置與需求 (prerequisites)：npm、express、handlebars
 
-2.功能描述 (features)：
+# A1-Restaurant List
+## 1.環境建置與需求 ：npm、express、handlebars
+## 2.功能列表：
 
 2-1：可以一覽所有餐廳的資訊
 
