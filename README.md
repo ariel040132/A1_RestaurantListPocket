@@ -1,5 +1,7 @@
 # A1-Restaurant List
 
+![](https://imgur.com/a/sVV7eSq.png)
+
 ## 介紹
 
 此專案收藏了一些美食餐廳，可供使用者查閱餐廳資訊。
