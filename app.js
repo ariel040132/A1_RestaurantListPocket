@@ -22,7 +22,7 @@ app.get("/restaurants/:restaurant_id", (req, res) => {
   const restaurants = restaurantList.results.find(
     (restaurant) => restaurant.id.toString() === req.params.restaurant_id
   );
-  res.render("show", { restaurants: restaurants });
+  res.render("show", { restaurants });
 });
 
 //search function
@@ -34,7 +34,7 @@ app.get("/search", (req, res) => {
       restaurant.category.toLowerCase().includes(keyword.toLowerCase())
     );
   });
-  res.render("index", { restaurants: restaurants, keyword: keyword });
+  res.render("index", { restaurants, keyword });
 });
 
 // start and listen on the Express server
