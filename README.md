@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # A1｜Restaurant List
 ![](https://i.imgur.com/6pZNogg.png)
 
