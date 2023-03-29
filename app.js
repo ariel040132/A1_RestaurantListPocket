@@ -1,34 +1,62 @@
 // require packages used in the project
 const express = require("express");
-const app = express();
-const port = 3000;
 const exphbs = require("express-handlebars");
-const restaurantList = require("./restaurant.json");
+//const methodOverride = require("method-override");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const restaurantList = require("./models/Restaurant");
 
-//載入之後，要告訴 Express：麻煩幫我把樣板引擎交給 express-handlebars：
+if (process.env.NODE_ENV !== "production") {
+  // 加入這段 code, 僅在非正式環境時, 使用 dotenv
+  // 要加在設定連線到mongodb之前
+  require("dotenv").config();
+}
+
+//! 設定連線到 mongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+db.on("error", () => {
+  console.log("mongodb error!");
+});
+db.once("open", () => {
+  console.log("mongodb connected!");
+});
+
+const app = express();
+
+//! app setting
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
-//產生靜態檔案
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(methodOverride("_method"));
 
-// routes setting
+//! 以上為環境設定，以下為路由器設定
 app.get("/", (req, res) => {
-  res.render("index", { restaurants: restaurantList.results });
+  restaurantList
+    .find()
+    .lean()
+    .then((restaurants) => res.render("index", { restaurants: restaurants }))
+    .catch((error) => console.log(error));
 });
 
 //show 頁面
-app.get("/restaurants/:restaurant_id", (req, res) => {
-  const restaurants = restaurantList.results.find(
-    (restaurant) => restaurant.id.toString() === req.params.restaurant_id
-  );
-  res.render("show", { restaurants });
+app.get("/restaurants/:id", (req, res) => {
+  const id = req.params.id;
+  return restaurantList
+    .findById(id)
+    .lean()
+    .then((restaurants) => res.render("show", { restaurants }))
+    .catch((error) => console.log(error));
 });
 
-//search function
+//! search function
 app.get("/search", (req, res) => {
   const keyword = req.query.keyword;
-  const restaurants = restaurantList.results.filter((restaurant) => {
+  const restaurants = restaurantList.filter((restaurant) => {
     return (
       restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
       restaurant.category.toLowerCase().includes(keyword.toLowerCase())
@@ -37,7 +65,19 @@ app.get("/search", (req, res) => {
   res.render("index", { restaurants, keyword });
 });
 
-// start and listen on the Express server
-app.listen(port, () => {
-  console.log(`Express is listening on localhost:${port}`);
+//! create new restaurant function
+app.get("/restaurants/new", (req, res) => {
+  return res.render("new");
+});
+
+app.post("/restaurants", (req, res) => {
+  restaurantList
+    .create(req.body)
+    .then(() => res.redirect("/"))
+    .catch((error) => console.log(error));
+});
+
+//! start and listen on the Express server
+app.listen(3000, () => {
+  console.log(`Express is listening on localhost:3000`);
 });
