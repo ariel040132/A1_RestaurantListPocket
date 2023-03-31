@@ -1,6 +1,6 @@
 # A1-Restaurant List
 
-![](https://imgur.com/a/sVV7eSq.png)
+![](https://i.imgur.com/gG3VJLw.jpg)
 
 ## 介紹
 
@@ -36,4 +36,3 @@
 - Express-Handlebars 7.0.2
 - Bootstrap 5.1.3
 - Font-awesome 5.8.1
-  > > > > > > > 89b1ddea592f5c460c956739d87fc2c5d19d6343
