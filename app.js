@@ -22,7 +22,7 @@ app.get("/restaurants/:restaurant_id", (req, res) => {
   const restaurants = restaurantList.results.find(
     (restaurant) => restaurant.id.toString() === req.params.restaurant_id
   );
-  res.render("show", { restaurants: restaurants });
+  res.render("show", { restaurants });
 });
 
 //search function
