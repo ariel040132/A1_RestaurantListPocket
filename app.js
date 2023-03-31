@@ -97,7 +97,6 @@ app.post("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   Restaurant.findByIdAndUpdate(id, req.body)
     .then((result) => {
-      console.log(result);
       res.redirect(`/restaurants/${id}`);
     })
     .catch((err) => console.log(err));
