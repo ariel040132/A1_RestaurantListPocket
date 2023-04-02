@@ -42,5 +42,7 @@
 - Express-Handlebars 7.0.2
 - Bootstrap 5.1.3
 - Font-awesome 5.8.1
+  <<<<<<< HEAD
 - dotenv 16.0.3
-- mongoose 5.9.7
+- # mongoose 5.9.7
+  > > > > > > > 31c0196334c3dc9e9fb6e3a52bab00083b6e5c1b
