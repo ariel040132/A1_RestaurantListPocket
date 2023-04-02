@@ -65,7 +65,10 @@
               <a href="/restaurants/{{this._id}}"><button
                   class="btn btn-link btn-sm"
                 >Details</button></a>
-              <form action="./restaurants/{{this._id}}/delete" method="POST">
+              <form
+                action="./restaurants/{{this._id}}?_method=DELETE"
+                method="POST"
+              >
                 <button
                   type="submit"
                   class="btn btn-danger btn-sm text-white"
@@ -82,7 +85,12 @@
 
 <div class="create-btn">
   <a
+<<<<<<< HEAD
     href="/restaurants/new"
     style="text-decoration:none; font-size:large; color:white"
+=======
+    href="./restaurants/new"
+    style="text-decoration:none; color:white; font-size:large"
+>>>>>>> 31c0196334c3dc9e9fb6e3a52bab00083b6e5c1b
   >+</a>
 </div>
