@@ -10,8 +10,9 @@ const app = express();
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(express.urlencoded({ extended: true }));
+
 app.use(routes);
 //! start and listen on the Express server
 app.listen(port, () => {

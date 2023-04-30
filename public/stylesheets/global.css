@@ -115,3 +115,9 @@ header {
   transform: translateY(-5px);
   transition-duration: 0.3s;
 }
+.input-group {
+  width: 470px;
+}
+.sort-group {
+  width: 150px;
+}

@@ -6,7 +6,7 @@ const Restaurant = require("../../models/Restaurants");
 router.get("/new", (req, res) => {
   res.render("new");
 });
-router.post("/restaurants", (req, res) => {
+router.post("/", (req, res) => {
   Restaurant.create(req.body)
     .then(() => res.redirect("/"))
     .catch((err) => console.log(err));
@@ -37,7 +37,8 @@ router.put("/:id", (req, res) => {
   const id = req.params.id;
   Restaurant.findByIdAndUpdate(id, req.body)
     .then((result) => {
-      res.redirect(`/restaurants/${id}`);
+      console.log(result);
+      res.redirect(`/restaurants/${result._id}`);
     })
     .catch((err) => console.log(err));
 });

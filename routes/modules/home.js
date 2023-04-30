@@ -13,8 +13,9 @@ router.get("/", (req, res) => {
 //! 搜尋餐廳
 router.get("/search", (req, res) => {
   if (!req.query.keywords) {
-    res.redirect("/");
+    return res.redirect("/");
   }
+
   const keywords = req.query.keywords;
   const keyword = req.query.keywords.trim().toLowerCase();
 
@@ -31,6 +32,14 @@ router.get("/search", (req, res) => {
       res.render("index", { restaurantData: filterData, keywords });
     })
     .catch((err) => console.log(err));
+
+  // if(req.params ==='category'){
+
+  // }
 });
+// router.get("/sort", (req, res) => {
+//   const sortType = req.query.order;
+//   console.log(req.query);
+// });
 //! 匯出模組
 module.exports = router;
