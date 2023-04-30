@@ -4,6 +4,7 @@ const routes = require("./routes");
 const methodOverride = require("method-override");
 const port = 3000;
 const exphbs = require("express-handlebars");
+const session = require("express-session");
 require("./config/mongoose");
 //! 樣板引擎設定
 const app = express();
@@ -12,6 +13,13 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "ThisIsMySecretKey",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 app.use(routes);
 //! start and listen on the Express server
