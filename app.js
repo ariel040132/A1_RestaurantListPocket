@@ -6,6 +6,7 @@ const port = 3000;
 const exphbs = require("express-handlebars");
 const session = require("express-session");
 const usePassport = require("./config/passport");
+
 require("./config/mongoose");
 //! 樣板引擎設定
 const app = express();
