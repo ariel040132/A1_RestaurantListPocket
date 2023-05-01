@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Restaurant = require("../../models/Restaurants");
+const User = require("../../models/users");
 //! 首頁 - finished
 router.get("/", (req, res) => {
-  Restaurant.find({})
+  const userId = req.user._id;
+  Restaurant.find({ userId })
     .lean()
     .then((restaurantData) => {
       res.render("index", { restaurantData });

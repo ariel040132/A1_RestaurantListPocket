@@ -3,15 +3,18 @@ const router = express.Router();
 const User = require("../../models/users");
 const passport = require("passport");
 //!登入Get
-router.get(
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
+//!登入Post
+router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/users/login",
   })
 );
-//!登入Post
-router.post("/login", (req, res) => {});
 //!註冊Get
 router.get("/register", (req, res) => {
   res.render("register");
@@ -41,6 +44,7 @@ router.post("/register", (req, res) => {
 //! 登出路由
 router.get("/logout", (req, res) => {
   req.logout();
+  req.flash("success_msg", "你已經成功登出。");
   res.redirect("/users/login");
 });
 

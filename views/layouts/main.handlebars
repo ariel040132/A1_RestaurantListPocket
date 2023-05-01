@@ -31,12 +31,19 @@
               class="d-inline-block align-top"
               alt="我的餐廳清單"
             />
-            My Pocket List For Restaurant
+            {{#if isAuthenticated}}{{user.name}}'s{{/if}}
+            Pocket List For Restaurant
           </a>
         </div>
+        {{#if isAuthenticated}}
+          <a href="/users/logout" class="btn btn-outline-dark">Logout</a>
+        {{else}}
+          <a href="/users/login" class="btn btn-outline-dark">Login</a>
+        {{/if}}
       </nav>
 
       <div class="banner"></div>
+
     </header>
 
     <!-- partial templates will replace the part of "body" here -->

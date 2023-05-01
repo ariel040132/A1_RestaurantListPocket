@@ -1,21 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const Restaurant = require("../../models/Restaurants");
+const User = require("../../models/users");
 
 //! 新增餐廳 - finished
 router.get("/new", (req, res) => {
   res.render("new");
 });
 router.post("/", (req, res) => {
-  Restaurant.create(req.body)
+  const userId = req.user._id;
+  const restaurant = {
+    ...req.body,
+    userId: userId,
+  };
+  return Restaurant.create(restaurant)
     .then(() => res.redirect("/"))
     .catch((err) => console.log(err));
 });
 
 //! 餐廳詳情- finished
 router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  Restaurant.findById(id)
+  const _id = req.params.id;
+  const userId = req.user._id;
+  Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurants) => {
       res.render("show", { restaurants });
@@ -25,8 +32,9 @@ router.get("/:id", (req, res) => {
 
 //! 編輯餐廳 - finished
 router.get("/:id/edit", (req, res) => {
-  const id = req.params.id;
-  Restaurant.findById(id)
+  const _id = req.params.id;
+  const userId = req.user._id;
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurantData) => {
       res.render("edit", { restaurantData });
@@ -34,8 +42,10 @@ router.get("/:id/edit", (req, res) => {
     .catch((err) => console.log(err));
 });
 router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  Restaurant.findByIdAndUpdate(id, req.body)
+  const _id = req.params.id;
+  const userId = req.user._id;
+  const updateObj = { ...req.body, userId };
+  Restaurant.findByIdAndUpdate(_id, updateObj)
     .then((result) => {
       console.log(result);
       res.redirect(`/restaurants/${result._id}`);
@@ -46,7 +56,8 @@ router.put("/:id", (req, res) => {
 //! 刪除餐廳 - finished
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-  Restaurant.findByIdAndRemove(id)
+  const userId = req.user._id;
+  return Restaurant.findByIdAndRemove(id)
     .lean()
     .then(() => res.redirect("/"))
     .catch((err) => console.log(err));

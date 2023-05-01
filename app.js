@@ -6,7 +6,7 @@ const port = 3000;
 const exphbs = require("express-handlebars");
 const session = require("express-session");
 const usePassport = require("./config/passport");
-
+const flash = require("connect-flash");
 require("./config/mongoose");
 //! 樣板引擎設定
 const app = express();
@@ -24,7 +24,16 @@ app.use(
 );
 
 usePassport(app);
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.user = req.user;
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.warning_msg = req.flash("warning_msg");
+  next();
+});
 
+//*app.use之底
 app.use(routes);
 //! start and listen on the Express server
 app.listen(port, () => {
