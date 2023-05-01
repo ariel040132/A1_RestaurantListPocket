@@ -2,33 +2,6 @@
 <div class="container search-bar">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
-      {{!-- <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input
-            type="text"
-            name="keywords"
-            class="form-control"
-            placeholder="輸入餐廳、分類"
-            aria-label="Restaurant Name..."
-            value="{{keywords}}"
-            aria-describedby="search-button"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i
-                class="fas fa-search"
-              ></i></button>
-          </div>
-          <div class="input-group">
-            <select class="form-select" id="sort" name="sort">
-              <option>A > Z</option>
-              <option>Z > A</option>
-              <option>類別</option>
-              <option>地區</option>
-            </select>
-          </div>
-        </div>
-      </form> --}}
       <form action="/search" style="display: inline-block;">
         <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-2">
           <div class="input-group mb-2 mb-sm-0 mr-sm-2">
@@ -47,29 +20,26 @@
           </div>
           <div class="sort-group">
             <select class="form-select" id="sort-select" name="sort">
-              <option value="useless">尚未優化完畢</option>
-              <option value="alphabetAsc">A > Z</option>
-              <option value="alphabetDesc">Z > A</option>
+              <option value="useless">選擇排序方式</option>
+              <option value="asc">A > Z</option>
+              <option value="desc">Z > A</option>
               <option value="category">類別</option>
               <option value="location">地區</option>
             </select>
           </div>
         </div>
       </form>
-      {{! <form action="/orderselect" style="display: inline-block;">
-        
-      </form> }}
 
     </div>
   </div>
+  <script>
+    const sortSelect = document.getElementById('sort-select')
+    selectElement.addEventListener('change', (event) => { const sortType =
+    event.target.value; console.log(sortType); window.location.href =
+    `/sort?order=${sortType}`; });
+  </script>
 </div>
-{{! <script>
-  const sortSelect = document.getElementById('sort-select')
-  selectElement.addEventListener('click', (event) => { const sortType =
-  event.target.value; console.log(sortType); window.location.href =
-  `/sort?order=${sortType}`; });
 
-</script> }}
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">

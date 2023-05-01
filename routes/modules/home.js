@@ -4,9 +4,11 @@ const Restaurant = require("../../models/Restaurants");
 const User = require("../../models/users");
 //! 首頁 - finished
 router.get("/", (req, res) => {
+  const sortType = req.query.sort;
   const userId = req.user._id;
   Restaurant.find({ userId })
     .lean()
+    .sort(sortType)
     .then((restaurantData) => {
       res.render("index", { restaurantData });
     })
