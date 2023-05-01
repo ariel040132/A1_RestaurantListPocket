@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/users");
+const passport = require("passport");
 //!登入Get
-router.get("/login", (req, res) => {
-  res.render("login");
-});
+router.get(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/users/login",
+  })
+);
 //!登入Post
 router.post("/login", (req, res) => {});
 //!註冊Get
