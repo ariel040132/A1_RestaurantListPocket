@@ -33,11 +33,11 @@
     </div>
   </div>
   <script>
-    const sortSelect = document.getElementById('sort-select')
-    selectElement.addEventListener('change', (event) => { const sortType =
-    event.target.value; console.log(sortType); window.location.href =
-    `/sort?order=${sortType}`; });
+    const sortSelect = document.getElementById('sort-select');
+    sortSelect.addEventListener('change', (event) => { const sortType =
+    event.target.value; window.location.href = '/?sort=' + sortType; });
   </script>
+
 </div>
 
 <!-- restaurant list -->

@@ -1,14 +1,37 @@
 const express = require("express");
 const router = express.Router();
 const Restaurant = require("../../models/Restaurants");
-const User = require("../../models/users");
+
 //! 首頁 - finished
 router.get("/", (req, res) => {
   const sortType = req.query.sort;
   const userId = req.user._id;
+  let sortOption = {};
+
+  switch (sortType) {
+    case "asc":
+      sortOption = { name: "asc" };
+      break;
+    case "desc":
+      sortOption = { name: "desc" };
+      break;
+    case "category":
+      sortOption = { category: "asc" };
+      break;
+    case "location":
+      sortOption = { location: "asc" };
+      break;
+    case "rating":
+      sortOption = { rating: "desc" };
+      break;
+    default:
+      sortOption = { _id: "asc" };
+      break;
+  }
+
   Restaurant.find({ userId })
     .lean()
-    .sort(sortType)
+    .sort(sortOption)
     .then((restaurantData) => {
       res.render("index", { restaurantData });
     })
