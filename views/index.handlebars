@@ -76,18 +76,25 @@
             <div class="card-footer d-flex justify-content-end flex-wrap">
               <a href="/restaurants/{{this._id}}/edit"><button
                   class="btn btn-link btn-sm"
-                >Edit</button></a>
+                >編輯</button></a>
               <a href="/restaurants/{{this._id}}"><button
                   class="btn btn-link btn-sm"
-                >Details</button></a>
+                >詳細</button></a>
               <form
                 action="./restaurants/{{this._id}}?_method=DELETE"
                 method="POST"
+                id="delete-form"
               >
                 <button
                   type="submit"
                   class="btn btn-danger btn-sm text-white"
-                >delete</button>
+                >刪除</button>
+                <script>
+                  const deleteForm = document.getElementById('delete-form')
+                  deleteForm.addEventListener('submit', function (e) { const
+                  result = confirm('確定要刪除這家餐廳嗎？') if (!result) {
+                  event.preventDefault() } })
+                </script>
               </form>
             </div>
           </div>

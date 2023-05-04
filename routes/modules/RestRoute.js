@@ -55,6 +55,10 @@ router.put("/:id", (req, res) => {
 
 //! 刪除餐廳 - finished
 router.delete("/:id", (req, res) => {
+  // const deleteCheck = confirm("確定要刪除這家餐廳嗎？");
+  // if (!deleteCheck) {
+  //   return;
+  // }
   const id = req.params.id;
   const userId = req.user._id;
   return Restaurant.findByIdAndRemove(id)
