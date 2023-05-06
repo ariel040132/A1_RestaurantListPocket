@@ -88,13 +88,9 @@
                 <button
                   type="submit"
                   class="btn btn-danger btn-sm text-white"
+                  onclick="return confirm('確定要刪除這家餐廳嗎？')"
                 >刪除</button>
-                <script>
-                  const deleteForm = document.getElementById('delete-form')
-                  deleteForm.addEventListener('submit', function (e) { const
-                  result = confirm('確定要刪除這家餐廳嗎？') if (!result) {
-                  event.preventDefault() } })
-                </script>
+
               </form>
             </div>
           </div>
